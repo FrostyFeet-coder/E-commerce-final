@@ -45,6 +45,9 @@ router.post('/login',
         res.redirect('/products');
     }
 );
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  res.json({ message: "Logged in" });
+});
 
 router.get("/logout", (req, res) => {
     req.logout(function (err) {
