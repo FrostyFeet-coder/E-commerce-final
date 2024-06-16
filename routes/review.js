@@ -35,21 +35,6 @@ router.post('/products/:productid/review',validateReview,async(req, res) => {
     
 });
 
-router.delete(
-  "/products/:productId/review/:reviewId",
-  isLoggedIn,
-  isReviewAuthor,
-  async (req, res) => {
-    const { productId, reviewId } = req.params;
-    await Product.findByIdAndUpdate(productId, {
-      $pull: { reviews: reviewId },
-    });
-    await Review.findByIdAndDelete(reviewId);
-    req.flash("success", "Successfully deleted review");
-    res.redirect(`/products/${productId}`);
-  }
-);
-
 
 
 module.exports = router;
